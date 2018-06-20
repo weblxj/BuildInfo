@@ -40,8 +40,8 @@ class BuildInfo:
         response = requests.get(self.url, user_agent)#, auth=HTTPBasicAuth('ronling','weblxjhuQ~4'))
 
         exp_str = r'(\d{6},\d{4},PHONE,'+self.branch_name+',[^,]*,[^,]*,Passed)'
-        pattern_failure = re.compile(r'(\d{6},\d{4},PHONE,sl_master,[^,]*,[^,]*,Passed)',re.DOTALL)
-        print re.findall(pattern_failure,response.content)
+        pattern_failure = re.compile(exp_str,re.DOTALL)
+        #print re.findall(pattern_failure,response.content)
         count_passed = len(re.findall(pattern_failure,response.content))
         print 'The passed build is: %d' % count_passed
         return count_passed
@@ -54,5 +54,12 @@ class BuildInfo:
         return pass_rate
 
 if __name__ == '__main__':
-    build_info = BuildInfo('slm_mppmr2','12-10-2017','6-15-2018')
+    build_info = BuildInfo('slm_mppmr2','12-10-2017','6-20-2018')
     build_info.getPassedRatio()
+
+    build_info2 = BuildInfo('sl_master','1-31-2018','6-20-2018')
+    build_info2.getPassedRatio()
+
+
+
+    
